@@ -5,6 +5,7 @@ type Query {
   people: [Person!]
   film(id: ID): Film!
   boardgamegeek(id: ID): BoardGame!
+  bgg_search(search: String!): BoardGameSearch!
 }
 
 type BoardGame {
@@ -19,10 +20,14 @@ type BoardGame {
   boardgameMechanic: [String]!
   usersRated: Int!
   averageRating: Float!
-  rankings: [String]! #Fix this array!
+  rankings: [String]! #Fix this array! Parse it into a usable object
   numOfWeights: Int!
   averageWeight: Float!
   bggLink: String!
+}
+
+type BoardGameSearch{
+  objectId: Int!
 }
 
 type Person {

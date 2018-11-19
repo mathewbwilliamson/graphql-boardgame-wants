@@ -22,8 +22,6 @@ module.exports = async (root, args) => await axios
     console.log(boardgamesObj.statistics.ratings)
     const boardGameRanks = boardGameRatings.ranks.rank;
 
-    //Link to BGG
-    //Statistics: averageweight, numweights, usersrated, average, ranks??
     const obj = {
       name: nameFilter[0]._text,
       description: boardgamesObj.description._text,
