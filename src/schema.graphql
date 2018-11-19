@@ -2,16 +2,42 @@ type Query {
   info: String!
   packageName: String!
   person(id: ID!): Person!
+  people: [Person!]
+  film(id: ID): Film!
+  boardgamegeek(id: ID): BoardGame!
+}
+
+type BoardGame {
+  description: String!
+  name: String!
+  minPlayers: Int!
+  maxPlayers: Int!
+  playingTime: Int!
+  yearPublished: Int!
+  image: String!
+  thumbnail: String!
+  boardgameMechanic: [String]!
+  usersRated: Int!
+  averageRating: Int!
+  rankings: [String]!
+  numOfWeights: Int!
+  averageWeight: Int!
 }
 
 type Person {
-  name: String!,
-	height: Int!,
-	mass: Int!,
-	hair_color: String!,
-	skin_color: String!,
-	eye_color: String!,
-	birth_year: String!,
+  name: String!
+	height: Int!
+	mass: Int!
+	hair_color: String!
+	skin_color: String!
+	eye_color: String!
+	birth_year: String!
 	gender: String!
   homeworld: String!
+}
+
+type Film {
+  title: String!
+  episode_id: Int!
+  opening_crawl: String!
 }

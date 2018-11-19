@@ -1,3 +1,5 @@
+'use strict';
+
 const { GraphQLServer } = require('graphql-yoga');
 
 const typeDefs='./src/schema.graphql';
@@ -14,5 +16,5 @@ const server = new GraphQLServer({
 })
 
 if (require.main === module) {
-  server.start(() => console.log(`Server is running`));
+  server.start(() => console.log('Server is running'));
 }
