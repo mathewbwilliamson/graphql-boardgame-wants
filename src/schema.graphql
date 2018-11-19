@@ -18,10 +18,11 @@ type BoardGame {
   thumbnail: String!
   boardgameMechanic: [String]!
   usersRated: Int!
-  averageRating: Int!
-  rankings: [String]!
+  averageRating: Float!
+  rankings: [String]! #Fix this array!
   numOfWeights: Int!
-  averageWeight: Int!
+  averageWeight: Float!
+  bggLink: String!
 }
 
 type Person {

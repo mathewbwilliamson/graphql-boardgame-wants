@@ -39,6 +39,7 @@ module.exports = async (root, args) => await axios
       rankings: boardGameRanks,
       numOfWeights: boardGameRatings.numweights._text,
       averageWeight: boardGameRatings.averageweight._text,
+      bggLink: `https://boardgamegeek.com/boardgame/${args.id}`
     }
     return obj;
     
