@@ -5,7 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^6.1.0",
     "graphql-yoga": "^1.16.7",
+    "mongoose": "^5.3.13",
     "xml-js": "^1.6.8"
   },
   "scripts": {
