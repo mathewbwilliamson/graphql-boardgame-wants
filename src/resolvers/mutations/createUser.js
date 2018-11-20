@@ -1,10 +1,15 @@
 'use strict';
 
-module.exports = (root, args) => {
+const User = require('../../models/User');
+
+module.exports = async (root, args) => {
   const {username, password} = args;
-  return {
-    userId: 1,
-    username,
-    password
-  };
+
+  try {
+    return await User.create({username, password});
+  } catch(err) {
+    console.log('/////////////////////////////////////////////////////////////////////')
+    console.error(err)
+  }
+  
 };

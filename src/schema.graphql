@@ -14,7 +14,7 @@ type Mutation {
 }
 
 type User {
-  userId: String!
+  userId: String
   username: String!
   password: String! 
 }
