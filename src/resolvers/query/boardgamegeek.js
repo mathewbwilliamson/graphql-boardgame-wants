@@ -1,6 +1,8 @@
 const axios = require('axios');
 const xmlToJson = require('xml-js');
 
+// This query is redundant
+
 module.exports = async (root, args) => await axios
   .get(`https://www.boardgamegeek.com/xmlapi/boardgame/${args.id}?&stats=1`)
   .then(response => {

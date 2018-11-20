@@ -6,6 +6,7 @@ type Query {
   film(id: ID): Film!
   boardgamegeek(id: ID): BoardGame!
   bgg_search(search: String!): BoardGameSearch!
+  bgg_search_and_get(search: String!): BoardGame!
 }
 
 type BoardGame {
@@ -27,6 +28,7 @@ type BoardGame {
 }
 
 type BoardGameSearch{
+  name: String!
   objectId: Int!
 }
 
