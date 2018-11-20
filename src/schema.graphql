@@ -9,6 +9,16 @@ type Query {
   bgg_search_and_get(search: String!): BoardGame!
 }
 
+type Mutation {
+  createUser(username: String!, password: String!): User!
+}
+
+type User {
+  userId: String!
+  username: String!
+  password: String! 
+}
+
 type BoardGame {
   description: String!
   name: String!

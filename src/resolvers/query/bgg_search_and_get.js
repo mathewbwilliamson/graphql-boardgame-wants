@@ -58,20 +58,21 @@ module.exports = async (root, args) => await axios
   .then(response => {
     const boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
     
-    //filter name array to get primary="true"
+    //filter name array to get primary="true" which returns the main name of game
     const nameFilter = boardgamesObj.name.filter( item => {
       if ('primary' in item._attributes) {
         return item;
       }
     });
 
+    //Creates an array of all the boardgame mechanics used in the game
     const boardgameMechanic = boardgamesObj.boardgamemechanic.map(item => {
       return item._text
     })
 
     const boardGameRatings = boardgamesObj.statistics.ratings;
 
-    console.log(boardgamesObj.statistics.ratings)
+    // console.log(boardgamesObj.statistics.ratings)
     const boardGameRanks = boardGameRatings.ranks.rank;
 
     const obj = {
@@ -92,6 +93,5 @@ module.exports = async (root, args) => await axios
       bggLink: `https://boardgamegeek.com/boardgame/${args.id}`
     }
     return obj;
-    
   }
     );
