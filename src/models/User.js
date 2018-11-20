@@ -1,11 +1,14 @@
 'use strict';
 
 const mongoose = require('mongoose');
+// const scheduledEventsSchema = require('./scheduled-events')
+ 
 
 const userSchema = new mongoose.Schema({
   userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  // scheduledEvents: [scheduledEventsSchema],
 })
 
 userSchema.set( 'toObject', {

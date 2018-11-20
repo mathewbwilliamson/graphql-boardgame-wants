@@ -1,7 +1,7 @@
 'use strict';
 
 const User = require('../../models/User');
-
+ 
 module.exports = async (root, args) => {
   const {username, password} = args;
 
