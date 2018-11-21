@@ -21,8 +21,6 @@ const boardgameSchema = new mongoose.Schema({
   boardgameMechanic: { type: Array },
 });
 
-
-
 boardgameSchema.index({ name: 1, bggLink: 1, userId: 1}, { unique: true });
 
 // Add `createdAt` and `updatedAt` fields
