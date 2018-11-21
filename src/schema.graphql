@@ -7,6 +7,15 @@ type Query {
   boardgamegeek(id: ID): BoardGame!
   bgg_search(search: String!): BoardGameSearch!
   bgg_search_and_get(search: String!): BoardGame!
+  boardgamedbfind(userId: String!, 
+    name: String, 
+    objectId: Int, 
+    playingTime: Int, 
+    minPlayers: Int, 
+    maxPlayers: Int,
+    yearPublished: Int,
+    averageWeight: Float
+    ): BoardGame!
 }
 
 type Mutation {
