@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const boardgameSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   name: { type: String, required: true },
+  objectId: { type: Number, required: true },
   bggLink: { type: String, required: true },
   description: { type: String },
   minPlayers: { type: Number },
@@ -21,7 +22,7 @@ const boardgameSchema = new mongoose.Schema({
   boardgameMechanic: { type: Array },
 });
 
-boardgameSchema.index({ name: 1, bggLink: 1, userId: 1}, { unique: true });
+boardgameSchema.index({ name: 1, userId: 1, objectId: 1}, { unique: true });
 
 // Add `createdAt` and `updatedAt` fields
 boardgameSchema.set('timestamps', true);
