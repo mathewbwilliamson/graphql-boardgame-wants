@@ -15,5 +15,4 @@ module.exports = async (root, args) => {
     .catch(err => {
       console.error('This is an error in boardgamedbfind', err)
     })
-  
 }
