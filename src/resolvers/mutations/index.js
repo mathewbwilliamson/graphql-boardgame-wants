@@ -2,5 +2,6 @@
 
 const createUser = require('./createUser');
 const createBoardgame = require('./createBoardgame');
- 
-module.exports = {createUser, createBoardgame};
+const deleteBoardgame = require('./deleteBoardgame');
+
+module.exports = {createUser, createBoardgame, deleteBoardgame};

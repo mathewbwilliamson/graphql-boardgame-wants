@@ -12,7 +12,9 @@ type Query {
 type Mutation {
   createUser(username: String!, password: String!): User!
   createBoardgame(
+    userId: String!,
     description: String!,
+    objectId: Int!,
     name: String!,
     minPlayers: Int!,
     maxPlayers: Int!,
@@ -27,6 +29,7 @@ type Mutation {
     averageWeight: Float!,
     bggLink: String!
     ): BoardGame!
+  deleteBoardgame( userId: String!, objectId: String!): BoardGame!
 }
 
 type User {
@@ -37,6 +40,7 @@ type User {
 
 type BoardGame {
   description: String!
+  userId: String!
   name: String!
   objectId: Int!
   minPlayers: Int!
