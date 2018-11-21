@@ -38,6 +38,7 @@ type User {
 type BoardGame {
   description: String!
   name: String!
+  objectId: Int!
   minPlayers: Int!
   maxPlayers: Int!
   playingTime: Int!

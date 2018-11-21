@@ -77,6 +77,7 @@ module.exports = async (root, args) => await axios
 
     const obj = {
       name: nameFilter[0]._text,
+      objectId: boardgamesObj._attributes.objectid,
       description: boardgamesObj.description._text,
       minPlayers: boardgamesObj.minplayers._text,
       maxPlayers: boardgamesObj.maxplayers._text,
