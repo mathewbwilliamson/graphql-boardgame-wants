@@ -9,7 +9,7 @@ module.exports = async (root, args, context) => {
     throw('Unauthorized user')
   };
 
-  await axios
+  return await axios
   .get(`https://swapi.co/api/people/${args.id}`)
   .then(response => {
     console.log(response.data)
