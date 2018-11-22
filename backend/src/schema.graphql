@@ -50,7 +50,7 @@ type User {
 
 type BoardGame {
   description: String!
-  userId: String!
+  userId: String
   name: String!
   objectId: Int!
   minPlayers: Int!

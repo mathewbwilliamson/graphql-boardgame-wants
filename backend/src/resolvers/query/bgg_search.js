@@ -1,5 +1,6 @@
 const axios = require('axios');
 const xmlToJson = require('xml-js');
+const User = require('../../models/User');
 
 // This Query is redundant
 

@@ -41,7 +41,7 @@ module.exports = async (root, args, context) => {
     throw('Unauthorized User');
   };
 
-  await axios
+  return await axios
   .get(`https://boardgamegeek.com/xmlapi/search?search=${args.search}`)
   .then(response => {
     const capitalizedSearch = capitalizeString(args.search);
