@@ -5,8 +5,10 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^6.1.0",
     "graphql-yoga": "^1.16.7",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.13",
     "xml-js": "^1.6.8"
   },

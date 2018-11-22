@@ -1,7 +1,7 @@
 'use strict';
 
-const createUser = require('./createUser');
+const signup = require('./signup');
 const createBoardgame = require('./createBoardgame');
 const deleteBoardgame = require('./deleteBoardgame');
 
-module.exports = {createUser, createBoardgame, deleteBoardgame};
+module.exports = {signup, createBoardgame, deleteBoardgame};
