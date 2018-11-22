@@ -5,10 +5,11 @@ const mongoose = require('mongoose')
 const { PORT, DATABASE_URL, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db/db-mongoose');
 
-
 const typeDefs='./src/schema.graphql';
 const Query = require('./resolvers/query');
 const Mutation = require('./resolvers/mutations');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('./config');
 
 const resolvers= {
   Query,
@@ -17,7 +18,20 @@ const resolvers= {
 
 const server = new GraphQLServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: incomingData => ({
+    incomingData,
+    jwtVerification: () => {
+      const AuthHeader = incomingData.request.header('authorization');
+      if (!AuthHeader) {
+        throw('Unauthorized');
+      }
+
+      const token = AuthHeader.replace('Bearer', '');
+      const decodedToken = jwt.verify(token, JWT_SECRET);
+      return decodedToken;
+    }
+  })
 })
 
 if (require.main === module) {
