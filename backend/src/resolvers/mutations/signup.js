@@ -2,7 +2,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
-const JWT_SECRET = '1234'
+const { JWT_SECRET } = require('../../config');
  
 module.exports = async (root, args) => {
   const {username, password} = args;
