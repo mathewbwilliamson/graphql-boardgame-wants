@@ -1,0 +1,91 @@
+type Query {
+  info: String!
+  packageName: String!
+  person(id: ID!): Person!
+  people: [Person!]
+  film(id: ID): Film!
+  boardgamegeek(id: ID): BoardGame!
+  bgg_search(search: String!): BoardGameSearch!
+  bgg_search_and_get(search: String!): BoardGame!
+  boardgamedbfind(userId: String!, 
+    name: String, 
+    objectId: Int, 
+    playingTime: Int, 
+    minPlayers: Int, 
+    maxPlayers: Int,
+    yearPublished: Int,
+    averageWeight: Float
+    ): BoardGame!
+}
+
+type Mutation {
+  createUser(username: String!, password: String!): User!
+  createBoardgame(
+    userId: String!,
+    description: String!,
+    objectId: Int!,
+    name: String!,
+    minPlayers: Int!,
+    maxPlayers: Int!,
+    playingTime: Int!,
+    yearPublished: Int!,
+    image: String!,
+    thumbnail: String!,
+    boardgameMechanic: [String]!,
+    usersRated: Int!,
+    averageRating: Float!,
+    numOfWeights: Int!,
+    averageWeight: Float!,
+    bggLink: String!
+    ): BoardGame!
+  deleteBoardgame( userId: String!, objectId: String!): BoardGame!
+}
+
+type User {
+  userId: String
+  username: String!
+  password: String! 
+}
+
+type BoardGame {
+  description: String!
+  userId: String!
+  name: String!
+  objectId: Int!
+  minPlayers: Int!
+  maxPlayers: Int!
+  playingTime: Int!
+  yearPublished: Int!
+  image: String!
+  thumbnail: String!
+  boardgameMechanic: [String]!
+  usersRated: Int!
+  averageRating: Float!
+  rankings: [String]! #Fix this array! Parse it into a usable object
+  numOfWeights: Int!
+  averageWeight: Float!
+  bggLink: String!
+}
+
+type BoardGameSearch{
+  name: String!
+  objectId: Int!
+}
+
+type Person {
+  name: String!
+	height: Int!
+	mass: Int!
+	hair_color: String!
+	skin_color: String!
+	eye_color: String!
+	birth_year: String!
+	gender: String!
+  homeworld: String!
+}
+
+type Film {
+  title: String!
+  episode_id: Int!
+  opening_crawl: String!
+}
