@@ -1,5 +1,6 @@
 const axios = require('axios');
 const xmlToJson = require('xml-js');
+const User = require('../../models/User');
 
 // This Query starts with a search term
 //   then fetches the objectId and name for that SearchTerm's top result using a BGG API endpoint
@@ -32,7 +33,15 @@ function capitalizeString(str) {
   return capStrArray.join(' ');
 }
 
-module.exports = async (root, args) => await axios
+module.exports = async (root, args, context) => {
+  const data = context.jwtVerification();
+  const isUser = User.findOne({_id: data.user._id});
+
+  if (!isUser) {
+    throw('Unauthorized User');
+  };
+
+  await axios
   .get(`https://boardgamegeek.com/xmlapi/search?search=${args.search}`)
   .then(response => {
     const capitalizedSearch = capitalizeString(args.search);
@@ -93,6 +102,7 @@ module.exports = async (root, args) => await axios
       averageWeight: boardGameRatings.averageweight._text,
       bggLink: `https://boardgamegeek.com/boardgame/${args.id}`
     }
+    console.log(obj)
     return obj;
   }
-    );
+)}

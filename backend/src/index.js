@@ -23,12 +23,14 @@ const server = new GraphQLServer({
     incomingData,
     jwtVerification: () => {
       const AuthHeader = incomingData.request.header('authorization');
+      
       if (!AuthHeader) {
         throw('Unauthorized');
       }
 
       const token = AuthHeader.replace('Bearer', '');
       const decodedToken = jwt.verify(token, JWT_SECRET);
+      console.log(decodedToken)
       return decodedToken;
     }
   })
