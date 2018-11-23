@@ -10,12 +10,22 @@ function capitalizeString(str) {
   return capStrArray.join(' ');
 }
 
-module.exports = async (root, args) => await axios
+module.exports = async (root, args) => {
+  if (!args.search) {
+    return [];
+  }
+  return (await axios
+
   .get(`https://boardgamegeek.com/xmlapi/search?search=${args.search}`)
   .then(response => {
+    
     const capitalizedSearch = capitalizeString(args.search);
     let boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
-    
+    console.log('test', boardgamesObj.length)
+  
+    if (!boardgamesObj || boardgamesObj.length > 10 || boardgamesObj.length < 1) {
+      return [];
+    }
     // If there's only one item returned with a search, above returns an object so we have to convert to array
     if (!Array.isArray(boardgamesObj)) {
       boardgamesObj = [boardgamesObj];
@@ -40,5 +50,5 @@ module.exports = async (root, args) => await axios
     
     //rely on their search function returning the best thing
     return nameAndObjectIds;
-  }
-    );
+  })
+    )};

@@ -4,6 +4,7 @@ import './App.css';
 import { Query, Mutation } from 'react-apollo';
 import { PERSON, FEED_STUDENTS, SEARCHBGG, GETBOARDGAMEFROMBGG } from './Queries';
 import { CREATE_USER, CREATE_STUDENT } from './Mutations';
+import Boardgame from './Components/Boardgame'
 
 class App extends Component {
   constructor(props){
@@ -19,6 +20,7 @@ class App extends Component {
     }
   }
   componentDidMount(){
+    this.makeBoardgameProps();
     var query = `{
       person(id: 1){
         name
@@ -37,6 +39,7 @@ class App extends Component {
         query
       })
     })
+    
       .then(res => res.json())
       .then(res => console.log(res.data));
   }
@@ -44,6 +47,33 @@ class App extends Component {
   runSearchFunction() {
     const { bggSearchTerm, boardgamesFromSearch } = this.state; 
     return <Query query={SEARCHBGG} variables={{bggSearchTerm}}>
+          {({ loading, error, data })=>{
+            if(loading) return <div>Loading...</div>
+            if(error) return <div>Error {error}</div>
+     
+            return <div>
+              {/* {console.log(data)} */}
+              {data.bgg_search.map(boardgame => {
+                boardgamesFromSearch.push(boardgame.objectId)
+                return ( <div key={boardgame.objectId}>
+                  <p>{boardgame.name}</p>
+                  <p>{boardgame.objectId}</p>
+                  </div>
+                )
+              })}
+              
+            </div>
+            
+          }}
+        </Query>
+  }
+
+  getBoardgameData() {
+    const { bggSearchTerm, boardgamesFromSearch } = this.state; 
+    let queryArray = [];
+    for(let i =0; i< boardgamesFromSearch.length; i++) {
+      queryArray.push(
+        <Query query={SEARCHBGG} variables={{bggSearchTerm}}>
           {({ loading, error, data })=>{
             if(loading) return <div>Loading...</div>
             if(error) return <div>Error {error}</div>
@@ -63,6 +93,18 @@ class App extends Component {
             
           }}
         </Query>
+      )
+    }
+
+    return queryArray;
+  }
+
+  makeBoardgameProps() {
+    console.log('from function', this.state.boardgamesFromSearch)
+  return this.state.boardgamesFromSearch.map(boardgame => {
+      console.log('boardgame name', boardgame.name)
+      return <Boardgame boardgameId={boardgame} />
+    })
   }
 
   render() {
@@ -106,8 +148,10 @@ class App extends Component {
 
         <p>Search for Boardgame</p>
           <input type="text" placeholder="Search..." value={bggSearchTerm} onChange={e => this.setState({bggSearchTerm: e.target.value})} />
+          {this.makeBoardgameProps()}
           {this.runSearchFunction()}
-         
+          {console.log('In render', boardgamesFromSearch)}
+          
 
         {/* {this.state.boardgamesFromSearch.map(boardgameObject => {
           return <Query query={GETBOARDGAMEFROMBGG} variables={{boardgameObject}}>
