@@ -87,8 +87,15 @@ class App extends Component {
             if(error) return <div>Error {error}</div>
             
             return <div>
-              <p>{data.bgg_search_and_get.name}</p>
-              <p>{data.bgg_search_and_get.description}</p>
+              {console.log(data)}
+              {data.bgg_search.map(boardgame => {
+                return ( <div key={boardgame.objectId}>
+                  <p>{boardgame.name}</p>
+                  <p>{boardgame.objectId}</p>
+                  </div>
+                )
+              })}
+              
             </div>
             
           }}

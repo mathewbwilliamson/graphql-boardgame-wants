@@ -9,7 +9,8 @@ export const PERSON = gql`query FetchPerson($personId: ID!){
 }`;
 
 export const SEARCHBGG = gql`query BGGSearch($bggSearchTerm: String!){
-  bgg_search_and_get(search:$bggSearchTerm){
+  bgg_search(search:$bggSearchTerm){
     name
+    objectId
   }
 }`;
