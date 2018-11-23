@@ -15,24 +15,32 @@ export const SEARCHBGG = gql`query BGGSearch($bggSearchTerm: String!){
   }
 }`;
 
-export const GETBOARDGAMEFROMBGG = gql`
-  query getGameFromBGG( $bggId: Num!) {
-    getBoardgameFromBGG(id:124361){
-      name
-      description
-      objectId
-      minPlayers
-      maxPlayers
-      playingTime
-      yearPublished
-      image
-      thumbnail
-      boardgameMechanic
-      usersRated
-      averageRating
-      numOfWeights
-      averageWeight
-      bggLink
-    }
+export const GETBOARDGAMEFROMBGG = gql`query getBoardgameFromBGG($id: Int!){
+  getBoardgameFromBGG(id:$id){
+    name
   }
-`;
+}
+
+`
+
+// export const GETBOARDGAMEFROMBGG = gql`
+//   query getBoardgameFromBGG( $boardgameId: Int!) {
+//     getBoardgameFromBGG(id:$boardgameId){
+//       name
+//       description
+//       objectId
+//       minPlayers
+//       maxPlayers
+//       playingTime
+//       yearPublished
+//       image
+//       thumbnail
+//       boardgameMechanic
+//       usersRated
+//       averageRating
+//       numOfWeights
+//       averageWeight
+//       bggLink
+//     }
+//   }
+// `;

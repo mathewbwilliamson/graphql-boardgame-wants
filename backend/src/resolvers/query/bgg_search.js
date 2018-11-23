@@ -11,6 +11,7 @@ function capitalizeString(str) {
 }
 
 module.exports = async (root, args) => {
+  // console.log(args)
   if (!args.search) {
     return [];
   }
@@ -21,7 +22,7 @@ module.exports = async (root, args) => {
     
     const capitalizedSearch = capitalizeString(args.search);
     let boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
-    console.log('test', boardgamesObj.length)
+    // console.log('test', boardgamesObj.length)
   
     if (!boardgamesObj || boardgamesObj.length > 10 || boardgamesObj.length < 1) {
       return [];
@@ -46,7 +47,7 @@ module.exports = async (root, args) => {
       }, {})
     const nameAndObjectIdsObj = arrayToObject(nameAndObjectIds)
 
-    console.log(nameAndObjectIdsObj)
+    // console.log(nameAndObjectIdsObj)
     
     //rely on their search function returning the best thing
     return nameAndObjectIds;

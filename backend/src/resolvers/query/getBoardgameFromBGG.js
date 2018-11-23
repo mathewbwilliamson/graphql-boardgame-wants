@@ -3,7 +3,9 @@ const xmlToJson = require('xml-js');
 
 // This query is redundant
 
-module.exports = async (root, args) => await axios
+module.exports = async (root, args) => {
+  console.log('These are the args', args)
+  return await axios
   .get(`https://www.boardgamegeek.com/xmlapi/boardgame/${args.id}?&stats=1`)
   .then(response => {
     const boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
@@ -47,4 +49,4 @@ module.exports = async (root, args) => await axios
     return obj;
     
   }
-    );
+)};

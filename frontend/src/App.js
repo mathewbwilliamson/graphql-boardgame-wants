@@ -56,8 +56,9 @@ class App extends Component {
               {data.bgg_search.map(boardgame => {
                 boardgamesFromSearch.push(boardgame.objectId)
                 return ( <div key={boardgame.objectId}>
-                  <p>{boardgame.name}</p>
-                  <p>{boardgame.objectId}</p>
+                  {/* <p>{boardgame.name}</p>
+                  <p>{boardgame.objectId}</p> */}
+                  {this.makeBoardgameProps()}
                   </div>
                 )
               })}
@@ -101,7 +102,7 @@ class App extends Component {
 
   makeBoardgameProps() {
     console.log('from function', this.state.boardgamesFromSearch)
-  return this.state.boardgamesFromSearch.map(boardgame => {
+    return this.state.boardgamesFromSearch.map(boardgame => {
       console.log('boardgame name', boardgame.name)
       return <Boardgame boardgameId={boardgame} />
     })
@@ -148,7 +149,7 @@ class App extends Component {
 
         <p>Search for Boardgame</p>
           <input type="text" placeholder="Search..." value={bggSearchTerm} onChange={e => this.setState({bggSearchTerm: e.target.value})} />
-          {this.makeBoardgameProps()}
+          {/* {this.makeBoardgameProps()} */}
           {this.runSearchFunction()}
           {console.log('In render', boardgamesFromSearch)}
           
