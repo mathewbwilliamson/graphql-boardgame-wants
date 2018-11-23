@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Query, Mutation } from 'react-apollo';
-import { PERSON, FEED_STUDENTS, SEARCHBGG } from './Queries';
+import { PERSON, FEED_STUDENTS, SEARCHBGG, GETBOARDGAMEFROMBGG } from './Queries';
 import { CREATE_USER, CREATE_STUDENT } from './Mutations';
 
 class App extends Component {
@@ -14,7 +14,8 @@ class App extends Component {
       password: '',
       birthDate: '',
       personId: 1,
-      bggSearchTerm: 'concordia'
+      bggSearchTerm: 'concordia',
+      boardgamesFromSearch: [],
     }
   }
   componentDidMount(){
@@ -39,8 +40,33 @@ class App extends Component {
       .then(res => res.json())
       .then(res => console.log(res.data));
   }
+
+  runSearchFunction() {
+    const { bggSearchTerm, boardgamesFromSearch } = this.state; 
+    return <Query query={SEARCHBGG} variables={{bggSearchTerm}}>
+          {({ loading, error, data })=>{
+            if(loading) return <div>Loading...</div>
+            if(error) return <div>Error {error}</div>
+     
+            return <div>
+              {console.log(data)}
+              {data.bgg_search.map(boardgame => {
+                boardgamesFromSearch.push(boardgame.objectId)
+                return ( <div key={boardgame.objectId}>
+                  <p>{boardgame.name}</p>
+                  <p>{boardgame.objectId}</p>
+                  </div>
+                )
+              })}
+              
+            </div>
+            
+          }}
+        </Query>
+  }
+
   render() {
-    const {username, password, personId, bggSearchTerm} = this.state;
+    const {username, password, personId, bggSearchTerm, boardgamesFromSearch} = this.state;
     return (
       <div className="App">
         {/* <header className="App-header">
@@ -80,26 +106,31 @@ class App extends Component {
 
         <p>Search for Boardgame</p>
           <input type="text" placeholder="Search..." value={bggSearchTerm} onChange={e => this.setState({bggSearchTerm: e.target.value})} />
-          
-        <Query query={SEARCHBGG} variables={{bggSearchTerm}}>
-          {({ loading, error, data })=>{
+          {this.runSearchFunction()}
+         
+
+        {/* {this.state.boardgamesFromSearch.map(boardgameObject => {
+          return <Query query={GETBOARDGAMEFROMBGG} variables={{boardgameObject}}>
+            {({ loading, error, data })=>{
             if(loading) return <div>Loading...</div>
             if(error) return <div>Error {error}</div>
-            
+     
             return <div>
               {console.log(data)}
-              {data.bgg_search.map(boardgame => {
+              {/* {data.bgg_search.map(boardgame => {
+                boardgamesFromSearch.push(boardgame.objectId)
                 return ( <div key={boardgame.objectId}>
                   <p>{boardgame.name}</p>
                   <p>{boardgame.objectId}</p>
                   </div>
                 )
-              })}
+              })} 
               
             </div>
             
           }}
-        </Query> 
+          </Query>
+        } */}
 
 
           {/* <Mutation mutation={CREATE_STUDENT} variables={{name, email, password, birthDate}} update={(store, { data: { createStudent } }) =>{

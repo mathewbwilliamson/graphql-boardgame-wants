@@ -14,3 +14,25 @@ export const SEARCHBGG = gql`query BGGSearch($bggSearchTerm: String!){
     objectId
   }
 }`;
+
+export const GETBOARDGAMEFROMBGG = gql`
+  query getGameFromBGG( $bggId: Num!) {
+    getBoardgameFromBGG(id:124361){
+      name
+      description
+      objectId
+      minPlayers
+      maxPlayers
+      playingTime
+      yearPublished
+      image
+      thumbnail
+      boardgameMechanic
+      usersRated
+      averageRating
+      numOfWeights
+      averageWeight
+      bggLink
+    }
+  }
+`;
