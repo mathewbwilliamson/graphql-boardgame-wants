@@ -5,7 +5,7 @@ const packageName = require('./packageName');
 const person = require('./person');
 const people = require('./people');
 const film = require('./film');
-const boardgamegeek = require('./boardgamegeek');
+const getBoardgameFromBGG = require('./getBoardgameFromBGG');
 const bgg_search = require('./bgg_search');
 const bgg_search_and_get = require('./bgg_search_and_get');
 const boardgamedbfind = require('./boardgamedbfind');
@@ -16,7 +16,7 @@ module.exports = {
   person, 
   film, 
   people, 
-  boardgamegeek, 
+  getBoardgameFromBGG, 
   bgg_search,
   bgg_search_and_get,
   boardgamedbfind
