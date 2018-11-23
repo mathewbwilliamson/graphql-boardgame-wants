@@ -85,10 +85,17 @@ class App extends Component {
           {({ loading, error, data })=>{
             if(loading) return <div>Loading...</div>
             if(error) return <div>Error {error}</div>
-            return <div>
+            if(data.bgg_search_and_get.name) {
+              return <div>
               <p>{data.bgg_search_and_get.name}</p>
               <p>{data.bgg_search_and_get.description}</p>
             </div>
+            } else {
+              return <div>
+                <p>No Data</p>
+              </div>
+            }
+            
           }}
         </Query> 
 

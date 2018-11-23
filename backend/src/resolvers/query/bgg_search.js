@@ -26,8 +26,19 @@ module.exports = async (root, args) => await axios
         objectId: item._attributes.objectid
       }
     })
+
+    // Array: [ {name: , objectId: } ]
+
+    const arrayToObject = (array) =>
+      array.reduce((obj, item) => {
+        obj[item.objectId] = item
+        return obj
+      }, {})
+    const nameAndObjectIdsObj = arrayToObject(nameAndObjectIds)
+
+    console.log(nameAndObjectIdsObj)
     
     //rely on their search function returning the best thing
-    return nameAndObjectIds[0];
+    return nameAndObjectIds;
   }
     );

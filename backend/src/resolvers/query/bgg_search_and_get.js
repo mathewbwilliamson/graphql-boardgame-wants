@@ -44,6 +44,8 @@ module.exports = async (root, args, context) => {
   return await axios
   .get(`https://boardgamegeek.com/xmlapi/search?search=${args.search}`)
   .then(response => {
+    console.log(response)
+    if (!response) {return}
     const capitalizedSearch = capitalizeString(args.search);
     let boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
     
@@ -57,7 +59,7 @@ module.exports = async (root, args, context) => {
         objectId: item._attributes.objectid
       }
     })
-    
+    console.log(nameAndObjectIds[0])
     //rely on their search function returning the best thing
     return nameAndObjectIds[0];
   })
@@ -65,6 +67,25 @@ module.exports = async (root, args, context) => {
     return axios.get(`https://www.boardgamegeek.com/xmlapi/boardgame/${response.objectId}?&stats=1`)
   })
   .then(response => {
+    // console.log( '/////////////////////////////', response.data)
+    if (!response) {return {
+      name: null,
+      objectId: null,
+      description: null,
+      minPlayers: null,
+      maxPlayers: null,
+      playingTime: null,
+      yearPublished: null,
+      image: null,
+      thumbnail: null,
+      boardgameMechanic: null,
+      usersRated: null,
+      averageRating: null,
+      rankings: null,
+      numOfWeights: null,
+      averageWeight: null,
+      bggLink: null
+    }}
     const boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
     
     //filter name array to get primary="true" which returns the main name of game
@@ -102,7 +123,7 @@ module.exports = async (root, args, context) => {
       averageWeight: boardGameRatings.averageweight._text,
       bggLink: `https://boardgamegeek.com/boardgame/${args.id}`
     }
-    console.log(obj)
+    // console.log(obj)
     return obj;
   }
 )}
