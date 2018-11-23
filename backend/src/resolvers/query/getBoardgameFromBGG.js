@@ -7,13 +7,17 @@ module.exports = async (root, args) => await axios
   .get(`https://www.boardgamegeek.com/xmlapi/boardgame/${args.id}?&stats=1`)
   .then(response => {
     const boardgamesObj = JSON.parse(xmlToJson.xml2json(response.data, {compact: true, spaces: 4})).boardgames.boardgame;
-    
+
     //filter name array to get primary="true"
+    if (!Array.isArray(boardgamesObj.name)) {
+      boardgamesObj.name = [ boardgamesObj.name ];
+    }
+    
     const nameFilter = boardgamesObj.name.filter( item => {
       if ('primary' in item._attributes) {
         return item;
       }
-    });
+    });     
 
     const boardgameMechanic = boardgamesObj.boardgamemechanic.map(item => {
       return item._text
@@ -21,7 +25,6 @@ module.exports = async (root, args) => await axios
 
     const boardGameRatings = boardgamesObj.statistics.ratings;
 
-    console.log(boardgamesObj.statistics.ratings)
     const boardGameRanks = boardGameRatings.ranks.rank;
 
     const obj = {

@@ -9,6 +9,7 @@ const getBoardgameFromBGG = require('./getBoardgameFromBGG');
 const bgg_search = require('./bgg_search');
 const bgg_search_and_get = require('./bgg_search_and_get');
 const boardgamedbfind = require('./boardgamedbfind');
+const bgg_get_search_data = require('./bgg_get_search_data');
 
 module.exports = { 
   info, 
@@ -19,5 +20,6 @@ module.exports = {
   getBoardgameFromBGG, 
   bgg_search,
   bgg_search_and_get,
-  boardgamedbfind
+  boardgamedbfind,
+  bgg_get_search_data
 };

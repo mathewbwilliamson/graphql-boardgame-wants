@@ -61,10 +61,11 @@ module.exports = async (root, args, context) => {
     })
     console.log(nameAndObjectIds[0])
     //rely on their search function returning the best thing
-    return nameAndObjectIds[0];
+    return nameAndObjectIds;
   })
   .then(response => {
-    return axios.get(`https://www.boardgamegeek.com/xmlapi/boardgame/${response.objectId}?&stats=1`)
+    console.log(response)
+    return axios.get(`https://www.boardgamegeek.com/xmlapi/boardgame/${response[0].objectId}?&stats=1`)
   })
   .then(response => {
     // console.log( '/////////////////////////////', response.data)

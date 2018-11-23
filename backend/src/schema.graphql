@@ -7,6 +7,7 @@ type Query {
   getBoardgameFromBGG(id: ID): BoardGame!
   bgg_search(search: String!): [BoardGameSearch!]
   bgg_search_and_get(search: String!): BoardGame!
+  bgg_get_search_data(gameIds: [Int]!): [BoardGame!]
   boardgamedbfind(userId: String!, 
     name: String, 
     objectId: Int, 
