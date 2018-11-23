@@ -25,7 +25,7 @@ const server = new GraphQLServer({
       const AuthHeader = incomingData.request.header('authorization');
       
       if (!AuthHeader) {
-        throw('Unauthorized');
+        throw('Unauthorized User (Header)');
       }
 
       const token = AuthHeader.replace('Bearer', '');

@@ -34,12 +34,12 @@ function capitalizeString(str) {
 }
 
 module.exports = async (root, args, context) => {
-  const data = context.jwtVerification();
-  const isUser = User.findOne({_id: data.user._id});
+  // const data = context.jwtVerification();
+  // const isUser = User.findOne({_id: data.user._id});
 
-  if (!isUser) {
-    throw('Unauthorized User');
-  };
+  // if (!isUser) {
+  //   throw('Unauthorized User');
+  // };
 
   return await axios
   .get(`https://boardgamegeek.com/xmlapi/search?search=${args.search}`)

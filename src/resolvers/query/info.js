@@ -1,1 +1,0 @@
-module.exports = () => `GraphQL implementation of Star Wars API`;
