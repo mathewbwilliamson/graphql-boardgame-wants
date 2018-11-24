@@ -18,6 +18,8 @@ export const SEARCHBGG = gql`query BGGSearch($bggSearchTerm: String!){
 export const GETBOARDGAMEFROMBGG = gql`query getBoardgameFromBGG($id: Int!){
   getBoardgameFromBGG(id:$id){
     name
+    description
+    playingTime
   }
 }
 

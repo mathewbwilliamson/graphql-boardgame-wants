@@ -46,25 +46,15 @@ class App extends Component {
 
   runSearchFunction() {
     const { bggSearchTerm, boardgamesFromSearch } = this.state; 
-    return <Query query={SEARCHBGG} variables={{bggSearchTerm}}>
+    console.log('BggSearchTerm is ', bggSearchTerm)
+    const term = bggSearchTerm[0].objectId;
+
+    return <Query query={SEARCHBGG} variables={{term}}>
           {({ loading, error, data })=>{
             if(loading) return <div>Loading...</div>
             if(error) return <div>Error {error}</div>
-     
-            return <div>
-              {/* {console.log(data)} */}
-              {data.bgg_search.map(boardgame => {
-                boardgamesFromSearch.push(boardgame.objectId)
-                return ( <div key={boardgame.objectId}>
-                  {/* <p>{boardgame.name}</p>
-                  <p>{boardgame.objectId}</p> */}
-                  {this.makeBoardgameProps()}
-                  </div>
-                )
-              })}
-              
-            </div>
-            
+            //this.setState({boardgamesFromSearch: data.bgg_search})
+            console.log('This comes from runSearchFunc', data.bgg_search)
           }}
         </Query>
   }
@@ -82,7 +72,9 @@ class App extends Component {
             return <div>
               {console.log(data)}
               {data.bgg_search.map(boardgame => {
-                boardgamesFromSearch.push(boardgame.objectId)
+                if (!boardgamesFromSearch.includes(boardgame.objectId)) {
+                  boardgamesFromSearch.push(boardgame.objectId)
+                }
                 return ( <div key={boardgame.objectId}>
                   <p>{boardgame.name}</p>
                   <p>{boardgame.objectId}</p>
@@ -119,7 +111,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p> */}
-        <Query query={PERSON} variables={{personId}}>
+        {/* <Query query={PERSON} variables={{personId}}>
         {({ loading, error, data })=>{
           if(loading) return <div>Loading...</div>
           if(error) return <div>Error {error}</div>
@@ -129,7 +121,7 @@ class App extends Component {
             <p>{data.person.mass}</p>
           </div>
         }}
-        </Query>
+        </Query> */}
         <p>Sign Up</p>
           <input type="text" placeholder="Username" value={username} onChange={e => this.setState({username: e.target.value})} />
           <input type="text" placeholder="Password" value={password} onChange={e => this.setState({password: e.target.value})} />
@@ -149,11 +141,10 @@ class App extends Component {
 
         <p>Search for Boardgame</p>
           <input type="text" placeholder="Search..." value={bggSearchTerm} onChange={e => this.setState({bggSearchTerm: e.target.value})} />
-          {/* {this.makeBoardgameProps()} */}
           {this.runSearchFunction()}
+          
           {console.log('In render', boardgamesFromSearch)}
           
-
         {/* {this.state.boardgamesFromSearch.map(boardgameObject => {
           return <Query query={GETBOARDGAMEFROMBGG} variables={{boardgameObject}}>
             {({ loading, error, data })=>{

@@ -21,10 +21,20 @@ module.exports = async (root, args) => {
       }
     });     
 
+    console.log('//////////ERROR BOARDGAMEMECHANIC', boardgamesObj.boardgamemechanic)
+    if (boardgamesObj.boardgamemechanic && Array.isArray(boardgamesObj.boardgamemechanic)) {
+      const boardgameMechanic = boardgamesObj.boardgamemechanic.map(item => {
+        return item._text
+      })
+    } else {
+      const boardgameMechanic = [];
+    }
+
     const boardgameMechanic = boardgamesObj.boardgamemechanic.map(item => {
       return item._text
     })
-
+    console.log(boardgameMechanic)
+    
     const boardGameRatings = boardgamesObj.statistics.ratings;
 
     const boardGameRanks = boardGameRatings.ranks.rank;

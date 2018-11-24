@@ -9,14 +9,18 @@ export default function Boardgame(props) {
   return (
     <Query query={GETBOARDGAMEFROMBGG} variables={{id:boardgameId}}>
       {({ loading, error, data })=>{
-        console.log(error)
+        console.log('the error is', error)
         if(loading) return <div>Loading...</div>
-        if(error) return <div>Error</div>
+        if(error) {
+          console.log('The id is ', boardgameId)
+          return <div>Error</div>}
         console.log(error)
         console.log('data is ', data)
-        return <div key={data.getBoardgameFromBGG.objectId}>
-              <p>{data.getBoardgameFromBGG.name}</p>
-              <p>{data.getBoardgameFromBGG.objectId}</p>
+        return <div key={data.getBoardgameFromBGG.name}>
+              <p>Name: {data.getBoardgameFromBGG.name}</p>
+              <p>Playing Time: {data.getBoardgameFromBGG.playingTime}</p>
+              <p>BoardGameId: {boardgameId}</p>
+              <hr />
               </div>
       }}
     </Query>
